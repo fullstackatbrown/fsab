@@ -1,0 +1,23 @@
+syntax = "proto3";
+
+package proto.courses;
+
+option go_package = "github.com/fullstackatbrown/hours/pb";
+
+// Represents a course.
+message Course {
+  // Unique identifier.
+  string course_id = 1;
+
+  // The academic term this course belongs to.
+  string term = 3;
+
+  // User-configurable course parameters.
+  message CourseOptions {
+    // The human-readable title for the course.
+    string title = 1;
+  }
+
+  // Required. Contains user-configurable course settings.
+  CourseOptions course_options = 4;
+}

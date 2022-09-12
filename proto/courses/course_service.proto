@@ -1,0 +1,67 @@
+syntax = "proto3";
+
+package proto.courses;
+
+import "courses/course_models.proto";
+
+option go_package = "github.com/fullstackatbrown/hours/pb";
+
+service CourseService {
+  // Create a new course.
+  rpc CreateCourse(CreateCourseRequest) returns (CreateCourseResponse);
+
+  // Update an existing course.
+  rpc UpdateCourse(UpdateCourseRequest) returns (UpdateCourseResponse);
+
+  // Delete a course.
+  rpc DeleteCourse(DeleteCourseRequest) returns (DeleteCourseResponse);
+
+  // Archives (hides but not deletes) a course.
+  rpc ArchiveCourse(ArchiveCourseRequest) returns (ArchiveCourseResponse);
+
+  // Archives (hides but not deletes) all courses in a given course.
+  rpc ArchiveCoursesByTerm(ArchiveCoursesByTermRequest) returns (ArchiveCoursesByTermResponse);
+}
+
+message CreateCourseRequest {
+  Course.CourseOptions course_options = 1;
+}
+
+message CreateCourseResponse {
+  bool created = 1;
+  Course course = 2;
+}
+
+message UpdateCourseRequest {
+  Course.CourseOptions course_options = 1;
+}
+
+message UpdateCourseResponse {
+  bool updated = 1;
+  Course old_course = 2;
+}
+
+message DeleteCourseRequest {
+  string course_id = 1;
+}
+
+message DeleteCourseResponse {
+  bool deleted = 1;
+  Course deleted_course = 2;
+}
+
+message ArchiveCourseRequest {
+  string course_id = 1;
+}
+
+message ArchiveCourseResponse {
+  bool archived = 1;
+}
+
+message ArchiveCoursesByTermRequest {
+  string term = 1;
+}
+
+message ArchiveCoursesByTermResponse {
+  bool archived = 1;
+}

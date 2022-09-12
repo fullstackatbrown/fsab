@@ -1,0 +1,12 @@
+load("@rules_proto//proto:defs.bzl", "proto_library")
+
+proto_library(
+    name="models",
+    srcs=["course_models.proto"],
+)
+
+proto_library(
+    name="service",
+    srcs=["course_service.proto"],
+    deps=[":models"],
+)
